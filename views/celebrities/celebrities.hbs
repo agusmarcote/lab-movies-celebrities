@@ -1,4 +1,6 @@
 <h2>Celebrities</h2>
 {{#each dbCelebrities}}
     <h3>{{this.name}}</h3>
+    <a href="/celebrities/{{_id}}">See details</a>
+    <a href="/celebrities/{{_id}}/edit">Edit</a>
 {{/each}}

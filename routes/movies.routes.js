@@ -8,9 +8,7 @@ router.get("/create", (req, res) => {
 })
 
 router.post("/create", async (req, res) =>{
-    console.log("inside create")
     const {title, genre, plot} = req.body
-    console.log(title)
     try {
         await Movie.create({title, genre, plot})
         
@@ -23,7 +21,6 @@ router.post("/create", async (req, res) =>{
 router.get("/", async (req, res) =>{
     try{
         const dbMovies = await Movie.find()
-        console.log(dbMovies)
         res.render("movies/movies.hbs", {dbMovies})
     } catch(err){
         console.log(err)
@@ -38,21 +35,20 @@ router.get("/:movieId", async (req, res) => {
     }catch (err) {
       console.log(err)
     }
-  })
+})
 
-  router.post("/:movieId/delete", async (req, res) =>{
+router.post("/:movieId/delete", async (req, res) =>{
     const movieId = req.params.movieId
     try {
-      const movieDb = await Movie.findByIdAndRemove(movieId)
-      console.log("movie deleted")
+      const movieDb = await Movie.findByIdAndDelete(movieId)
       res.redirect("/movies")
     } catch (err) {
       console.log(err)
     }
-  })
+})
 
 
-  router.get("/:movieId/edit", async (req, res) => {
+router.get("/:movieId/edit", async (req, res) => {
     const movieId = req.params.movieId
     try {
       const movie = await Movie.findById(movieId)
@@ -60,9 +56,9 @@ router.get("/:movieId", async (req, res) => {
     } catch (err) {
       console.log(err)
     }
-  })
+})
   
-  router.post("/:movieId/edit", async (req, res) => {
+router.post("/:movieId/edit", async (req, res) => {
     const movie = req.body
     const movieId = req.params.movieId
     try {
@@ -71,13 +67,9 @@ router.get("/:movieId", async (req, res) => {
     } catch (err) {
       console.log(err)
     }
-  })
+})
 
   
-
-
-
-
 
 
 
